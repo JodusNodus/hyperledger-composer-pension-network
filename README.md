@@ -1,2 +1,3 @@
-# hyperledger-composer-pension-network
-Proof of concept tokenised pension network on Hyperledger Composer &amp; Fabric
+# pension
+
+A Hyperledger Composer network for distributing pension benefits
