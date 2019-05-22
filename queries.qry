@@ -1,0 +1,13 @@
+
+query selectRetiredCitizens {
+    description: "Select retired citizens"
+    statement:
+        SELECT com.thomasbilliet.pension.Citizen
+            WHERE (employmentStatus == "RETIRED")
+}
+
+query selectAllCitizenBenefits {
+    description: "Select all citizen benefits"
+    statement:
+        SELECT com.thomasbilliet.pension.CitizenBenefits
+  }

@@ -29,6 +29,7 @@ participant GoverningBody identified by id {
 
 participant Citizen identified by id {
   o String id
+  o DateTime birthDate
   o EmploymentStatus employmentStatus
 }
 
