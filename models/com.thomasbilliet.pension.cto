@@ -18,39 +18,65 @@
 
 namespace com.thomasbilliet.pension
 
-participant Citizen identified by id {
+/*
+* Participants
+*/
+
+participant GoverningBody identified by id {
   o String id
-  --> CitizenBenefits asset
+  o Double benefitExchangeRate
 }
 
+participant Citizen identified by id {
+  o String id
+  o EmploymentStatus employmentStatus
+}
+
+enum EmploymentStatus {
+  o RETIRED
+  o EMPLOYED
+}
+
+/*
+* Assets 
+*/
+
 // asset YearContribution identified by id {
+//   --> Citizen owner
+//   --> GoverningBody issuer
 //   o String id
 //   o String year
 //   o Double contribution
-//   o Double benefitTokens
-//   --> Citizen owner
+//   o Double benefitAmount
 // }
 
 asset CitizenBenefits identified by id {
+  --> Citizen owner
+  --> GoverningBody governingBody
   o String id
   o Double balance
-  o BenefitEvent[] history
+  o BenefitHistoryItem[] history
 }
 
-enum BenefitEventType {
+concept BenefitHistoryItem {
+  o Double amount
+  o BenefitHistoryType type
+  o String contributionAmount optional
+  o String contributionYear optional
+}
+
+enum BenefitHistoryType {
   o SEND
   o RECEIVE
   o MINT
 }
 
-concept BenefitEvent {
-  o Double amount
-  o BenefitEventType type
-  o String contributionAmount optional
-  o String contributionYear optional
-}
+/*
+* Transactions
+*/
 
 transaction MintBenefits {
+  --> GoverningBody issuer
   --> CitizenBenefits recipient
   o String amount
   o String contributionAmount
@@ -63,8 +89,27 @@ transaction TransferBenefits {
   o String amount
 }
 
-// event SampleEvent {
-//   --> SampleAsset asset
-//   o String oldValue
-//   o String newValue
-// }
+transaction ChangeGoverningBody {
+  --> GoverningBody newBody
+  --> CitizenBenefits citizenBenefits
+}
+
+transaction UpdateStatus {
+  --> GoverningBody governingBody
+  --> Citizen citizen
+  o EmploymentStatus newStatus
+}
+
+transaction UpdateExchangeRate {
+  --> GoverningBody governingBody
+  o Double newExchangeRate
+}
+
+/*
+* Events
+*/
+
+event ExampleEvent {
+  --> CitizenBenefits asset
+  o String newValue
+}
