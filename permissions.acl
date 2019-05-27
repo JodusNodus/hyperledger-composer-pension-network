@@ -2,11 +2,11 @@
 * Business Controll List
 */
 
-rule GoverningBodiesCanMintBenefits {
-    description: "Allow the responsible body to submit contributions and mint benefits"
+rule GoverningBodiesCanSubmitContributions {
+    description: "Allow the responsible body to submit contributions"
     participant(p): "com.thomasbilliet.pension.GoverningBody"
     operation: CREATE
-    resource(r): "com.thomasbilliet.pension.MintBenefits"
+    resource(r): "com.thomasbilliet.pension.SubmitContribution"
     condition: (r.issuer.getIdentifier() == p.getIdentifier() && r.recipient.governingBody.getIdentifier() == p.getIdentifier())
     action: ALLOW
 }
@@ -55,7 +55,7 @@ rule EveryoneCanReadEverything {
     description: "Give all participants read access to every resources"
     participant: "org.hyperledger.composer.system.Participant"
     operation: READ
-    resource: "com.thomasbilliet.pension.*"
+    resource: "**"
     action: ALLOW
 }
 

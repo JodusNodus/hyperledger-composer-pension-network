@@ -48,8 +48,8 @@ asset CitizenBenefits identified by id {
 concept BenefitHistoryItem {
   o Double amount
   o BenefitHistoryType type
-  o String contributionAmount optional
-  o String contributionYear optional
+  o Double contributionAmount optional
+  o Integer contributionYear optional
 }
 
 enum BenefitHistoryType {
@@ -62,18 +62,17 @@ enum BenefitHistoryType {
 * Transactions
 */
 
-transaction MintBenefits {
+transaction SubmitContribution {
   --> GoverningBody issuer
   --> CitizenBenefits recipient
-  o String amount
-  o String contributionAmount
-  o String contributionYear
+  o Double amount
+  o Integer year
 }
 
 transaction TransferBenefits {
   --> CitizenBenefits sender
   --> CitizenBenefits recipient
-  o String amount
+  o Double amount
 }
 
 transaction ChangeGoverningBody {

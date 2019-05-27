@@ -11,3 +11,9 @@ query selectAllCitizenBenefits {
     statement:
         SELECT com.thomasbilliet.pension.CitizenBenefits
   }
+
+query selectContributionSubmissions {
+    description: "Select all citizen benefits"
+    statement:
+        SELECT com.thomasbilliet.pension.SubmitContribution
+  }
