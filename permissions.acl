@@ -11,11 +11,11 @@ rule GoverningBodiesCanSubmitContributions {
     action: ALLOW
 }
 
-rule GoverningBodiesCanChangeBody {
+rule GoverningBodiesCanUpdateGoverningBody {
     description: "Allow the responsible body to transfer the responsibility of benefits to another governing body"
     participant(p): "com.thomasbilliet.pension.GoverningBody"
     operation: CREATE
-    resource(r): "com.thomasbilliet.pension.ChangeGoverningBody"
+    resource(r): "com.thomasbilliet.pension.UpdateGoverningBody"
     condition: (r.citizenBenefits.governingBody.getIdentifier() == p.getIdentifier())
     action: ALLOW
 }

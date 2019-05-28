@@ -75,21 +75,27 @@ transaction TransferBenefits {
   o Double amount
 }
 
-transaction ChangeGoverningBody {
-  --> GoverningBody newBody
+transaction UpdateGoverningBody {
+  --> GoverningBody governingBody
   --> CitizenBenefits citizenBenefits
 }
 
 transaction UpdateStatus {
   --> Citizen citizen
   --> CitizenBenefits citizenBenefits
-  o EmploymentStatus newStatus
+  o EmploymentStatus employmentStatus
 }
 
 transaction UpdateExchangeRate {
   --> GoverningBody governingBody
-  o Double newExchangeRate
+  o Double benefitExchangeRate
 }
+
+// transaction BenefitPayment {
+//   --> GoverningBody governingBody
+//   --> CitizenBenefits recipient
+//   o Double amount
+// }
 
 /*
 * Events
